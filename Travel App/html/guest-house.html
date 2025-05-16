@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guest Houses | EasyTrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #005eb8, #ffcc00);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #005eb8;
+    }
+
+    .guesthouse-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .guesthouse-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .guesthouse-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .guesthouse-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .guesthouse-details {
+      padding: 20px;
+    }
+
+    .guesthouse-name {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #005eb8;
+    }
+
+    .guesthouse-location {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .guesthouse-location i {
+      margin-right: 8px;
+      color: #ffb703;
+    }
+
+    .guesthouse-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffb703;
+      margin-bottom: 15px;
+    }
+
+    .guesthouse-amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .amenity {
+      background: #f0f8ff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #005eb8;
+    }
+
+    .book-btn {
+      background: #ffb703;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .book-btn:hover {
+      background: #e6b800;
+    }
+
+    .rating {
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #ffcc00;
+      color: #000;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="back-btn" onclick="window.history.back()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h1>easytrip</h1>
+    <div></div> <!-- Empty div for alignment -->
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">Available Guest Houses</h2>
+    
+    <div class="guesthouse-list" id="guesthouseList">
+      <!-- Guest houses will be populated dynamically -->
+    </div>
+
+    <script>
+      async function loadGuestHouses() {
+        try {
+          console.log('Fetching listings...');
+          const response = await fetch('../php/fetch_public_listings.php');
+          console.log('Response:', response);
+          const data = await response.json();
+          console.log('Data:', data);
+
+          if (data.success) {
+            const guesthouseList = document.getElementById('guesthouseList');
+            guesthouseList.innerHTML = ''; // Clear existing content
+
+            data.listings.forEach(listing => {
+              // Use a default image if none provided
+              const imageUrl = listing.image_url || 'https://www.telegraph.co.uk/content/dam/Travel/hotels/asia/nepal/the-pavilions-himalayas-pool-p.jpg';
+              
+              // Convert amenities string to array
+              const amenities = listing.amenities ? listing.amenities.split(',').map(a => a.trim()) : [];
+
+              const card = `
+                <div class="guesthouse-card">
+                  <img src="${imageUrl}" alt="${listing.name}" class="guesthouse-img">
+                  <div class="guesthouse-details">
+                    <h3 class="guesthouse-name">${listing.name}</h3>
+                    <div class="guesthouse-location">
+                      <i class="fas fa-map-marker-alt"></i> ${listing.location}
+                    </div>
+                    <div class="guesthouse-price">Rs. ${listing.nightly_rate} / night</div>
+                    <div class="guesthouse-amenities">
+                      ${amenities.map(amenity => `<span class="amenity">${amenity}</span>`).join('')}
+                    </div>
+                    <button class="book-btn" onclick="window.location.href='guesthousebooking.html?id=${listing.listing_id}'">Book Now</button>
+                  </div>
+                </div>
+              `;
+              guesthouseList.insertAdjacentHTML('beforeend', card);
+            });
+          } else {
+            console.error('Failed to load listings:', data.message);
+          }
+        } catch (error) {
+          console.error('Error loading listings:', error);
+        }
+      }
+
+      // Load guest houses when the page loads
+      document.addEventListener('DOMContentLoaded', loadGuestHouses);
+    </script>
+  </div>
+
+  <footer>
+    <p> 2025 EasyTrip. All rights reserved.</p>
+  </footer>
+</body>
+</html>

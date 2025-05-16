@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            animation: fadeIn 0.8s;
+        }
+        .booking-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .booking-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .booking-body {
+            padding: 2rem;
+        }
+        .booking-summary {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--secondary);
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .summary-label {
+            font-weight: bold;
+            color: var(--dark);
+        }
+        .summary-value {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .payment-method {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        .payment-method.selected {
+            border-color: var(--secondary);
+            background: rgba(46, 204, 113, 0.1);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .payment-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="booking-card animate__animated animate__fadeIn">
+            <div class="booking-header">
+                <h1>Complete Your Booking</h1>
+                <p>Fill in your details to confirm your reservation</p>
+            </div>
+            <div class="booking-body">
+                <div class="booking-summary">
+                    <h3 id="service-name" class="summary-label">Guesthouse Stay</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Price:</span>
+                        <span id="service-price" class="summary-value">₹1500</span>
+                    </div>
+                </div>
+
+                <form action="/guesthouse-bus-confirmation.html" method="GET">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Booking Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="payment-method" onclick="selectPayment(this)">
+                                <i class="fas fa-credit-card"></i>
+                                <div>Credit Card</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment(this)">
+                                <i class="fas fa-wallet"></i>
+                                <div>Wallet</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment(this)">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div>Cash</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Confirm & Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set service details from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service');
+        
+        const serviceName = document.getElementById('service-name');
+        const servicePrice = document.getElementById('service-price');
+        
+        if (service === 'guesthouse') {
+            serviceName.textContent = 'Guesthouse Stay';
+            servicePrice.textContent = '₹1500';
+        } else if (service === 'bus') {
+            serviceName.textContent = 'Bus Service';
+            servicePrice.textContent = '₹500';
+        } else if (service === 'combo') {
+            serviceName.textContent = 'Combo Package (Guesthouse + Bus)';
+            servicePrice.textContent = '₹1800';
+        }
+
+        // Payment method selection
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+    </script>
+</body>
+</html>

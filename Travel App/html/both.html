@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nepal Travel Services | Premium Guest Houses & Bus Bookings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --primary-dark: #1a252f;
+      --primary-light: #34495e;
+      --secondary-color: #e74c3c;
+      --accent-color: #3498db;
+      --success-color: #27ae60;
+      --error-color: #e74c3c;
+      --warning-color: #f39c12;
+      --text-color: #333;
+      --text-light: #7f8c8d;
+      --border-color: #ecf0f1;
+      --bg-color: #f8f9fa;
+      --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      animation: pulse 15s infinite linear;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-weight: 600;
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-weight: 300;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .logo-icon {
+      background-color: var(--secondary-color);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      animation: fadeIn 0.5s ease-out;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h2 {
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+
+    .card h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary-color);
+      border-radius: 2px;
+    }
+
+    .card h2 i {
+      margin-right: 1rem;
+      color: var(--secondary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary-light);
+    }
+
+    input, button, select, textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+    }
+
+    button i {
+      margin-right: 0.8rem;
+    }
+
+    button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .hidden { 
+      display: none; 
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+      background-color: var(--primary-color);
+      padding: 1rem 2rem;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(44, 62, 80, 0.05);
+    }
+
+    .btn-danger {
+      background-color: var(--error-color);
+    }
+
+    .btn-success {
+      background-color: var(--success-color);
+    }
+
+    .btn-warning {
+      background-color: var(--warning-color);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-color);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      animation: shake 0.5s;
+    }
+
+    .success-message {
+      color: var(--success-color);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .link {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .service-option {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .service-option:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(52, 152, 219, 0.03);
+    }
+
+    .service-option.selected {
+      border: 2px solid var(--accent-color);
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .service-option.combo {
+      border-left: 4px solid var(--secondary-color);
+    }
+
+    .service-option.combo::after {
+      content: 'COMBO DEAL';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(52, 152, 219, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1.5rem;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .service-details {
+      flex: 1;
+    }
+
+    .service-details h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+    }
+
+    .service-details p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-details p i {
+      margin-right: 0.5rem;
+      color: var(--accent-color);
+      width: 16px;
+      text-align: center;
+    }
+
+    .service-price {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-left: 1.5rem;
+      font-size: 1.2rem;
+      white-space: nowrap;
+    }
+
+    .service-price .original-price {
+      text-decoration: line-through;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+      font-weight: 400;
+    }
+
+    .service-price .discount {
+      color: var(--success-color);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .service-features {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+
+    .service-feature {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: var(--accent-color);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-feature i {
+      margin-right: 0.3rem;
+      font-size: 0.7rem;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .payment-method:hover {
+      border-color: var(--accent-color);
+    }
+
+    .payment-method.selected {
+      border: 2px solid var(--accent-color);
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+
+    .payment-icon {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1.5rem;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .payment-details {
+      flex: 1;
+    }
+
+    .payment-details h3 {
+      margin-bottom: 0.3rem;
+      color: var(--primary-dark);
+    }
+
+    .payment-details p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .confirmation-card {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .confirmation-icon {
+      font-size: 5rem;
+      color: var(--success-color);
+      margin-bottom: 2rem;
+      animation: bounce 1s;
+    }
+
+    .confirmation-message {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .booking-details {
+      background-color: rgba(52, 152, 219, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      text-align: left;
+      border: 1px solid var(--border-color);
+    }
+
+    .booking-details h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+    }
+
+    .booking-details h3 i {
+      margin-right: 0.8rem;
+      color: var(--accent-color);
+    }
+
+    .booking-details p {
+      margin-bottom: 0.8rem;
+      display: flex;
+    }
+
+    .booking-details .highlight {
+      font-weight: 600;
+      color: var(--primary-color);
+      min-width: 120px;
+      display: inline-block;
+    }
+
+    .booking-details .value {
+      flex: 1;
+    }
+
+    .section-title {
+      color: var(--primary-color);
+      margin: 2rem 0 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--secondary-color);
+      border-radius: 2px;
+    }
+
+    .booking-summary {
+      background-color: rgba(52, 152, 219, 0.05);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .booking-summary h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+
+    .booking-summary h3 i {
+      margin-right: 0.8rem;
+      color: var(--accent-color);
+    }
+
+    .booking-summary p {
+      margin-bottom: 0.5rem;
+    }
+
+    .total-amount {
+      font-weight: 700;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+    }
+
+    .total-amount span {
+      color: var(--secondary-color);
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab {
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-light);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .tab:hover {
+      color: var(--primary-color);
+    }
+
+    .tab.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--secondary-color);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .combo-benefits {
+      background-color: rgba(46, 204, 113, 0.1);
+      border-left: 4px solid var(--success-color);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .combo-benefits h4 {
+      color: var(--success-color);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .combo-benefits h4 i {
+      margin-right: 0.5rem;
+    }
+
+    .combo-benefits ul {
+      padding-left: 1.5rem;
+    }
+
+    .combo-benefits li {
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .container {
+        max-width: 800px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 2rem 1rem;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .service-option, .payment-method {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+      }
+      
+      .service-icon, .payment-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+      
+      .service-price {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+      
+      .service-details {
+        width: 100%;
+      }
+      
+      .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+      }
+      
+      .tab {
+        padding: 0.8rem 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      .card h2 {
+        font-size: 1.3rem;
+      }
+      
+      .confirmation-message {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-mountain"></i>
+        </div>
+        <h1>Easy Trip </h1>
+      </div>
+      <p>Premium guest house accommodations and comfortable bus services across Nepal's most beautiful destinations</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Search Card -->
+    <div class="card" id="searchCard">
+      <h2><i class="fas fa-search-location"></i> Plan Your Journey</h2>
+      <div class="form-group">
+        <label>Destination</label>
+        <select id="destinationSelect">
+          <option value="">Select your destination</option>
+          <option value="pokhara">Pokhara</option>
+          <option value="chitwan">Chitwan</option>
+          <option value="lumbini">Lumbini</option>
+          <option value="mustang">Mustang</option>
+          <option value="everest">Everest Region</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Travel Date</label>
+        <input type="date" id="travelDate">
+      </div>
+      <button onclick="searchServices()"><i class="fas fa-search"></i> Find Travel Options</button>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card hidden" id="resultsCard">
+      <h2><i class="fas fa-route"></i> Available Travel Packages</h2>
+      
+      <div class="tabs">
+        <div class="tab active" onclick="changeTab('guesthouse')"><i class="fas fa-hotel"></i> Guest Houses</div>
+        <div class="tab" onclick="changeTab('bus')"><i class="fas fa-bus"></i> Bus Services</div>
+        <div class="tab" onclick="changeTab('combo')"><i class="fas fa-gem"></i> Combo Packages</div>
+      </div>
+      
+      <!-- Guesthouse Tab -->
+      <div class="tab-content active" id="guesthouseTab">
+        <h3 class="section-title">Premium Guest House Options</h3>
+        <p>Select from our curated collection of comfortable guest houses with excellent amenities</p>
+        
+        <div class="service-option" onclick="selectService(this, 'guesthouse')">
+          <div class="service-icon">
+            <i class="fas fa-hotel"></i>
+          </div>
+          <div class="service-details">
+            <h3>Lakeside Retreat, Pokhara</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Lakeside, Pokhara (500m from Fewa Lake)</p>
+            <p><i class="fas fa-star"></i> 4.7 (248 reviews) | <i class="fas fa-wifi"></i> Free WiFi | <i class="fas fa-utensils"></i> Breakfast included</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-swimming-pool"></i> Pool</div>
+              <div class="service-feature"><i class="fas fa-parking"></i> Parking</div>
+              <div class="service-feature"><i class="fas fa-snowflake"></i> AC</div>
+              <div class="service-feature"><i class="fas fa-concierge-bell"></i> 24/7 Service</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 2,800<span class="original-price">Rs 3,500</span>
+            <span class="discount">20% OFF</span>
+          </div>
+        </div>
+        
+        <div class="service-option" onclick="selectService(this, 'guesthouse')">
+          <div class="service-icon">
+            <i class="fas fa-umbrella-beach"></i>
+          </div>
+          <div class="service-details">
+            <h3>Jungle Safari Lodge, Chitwan</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Sauraha, Chitwan (Near National Park)</p>
+            <p><i class="fas fa-star"></i> 4.5 (182 reviews) | <i class="fas fa-wifi"></i> Free WiFi | <i class="fas fa-utensils"></i> All meals included</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-elephant"></i> Safari Package</div>
+              <div class="service-feature"><i class="fas fa-parking"></i> Parking</div>
+              <div class="service-feature"><i class="fas fa-fan"></i> Fan</div>
+              <div class="service-feature"><i class="fas fa-concierge-bell"></i> 24/7 Service</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 1,200<span class="original-price">Rs 1,500</span>
+            <span class="discount">20% OFF</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bus Services Tab -->
+      <div class="tab-content" id="busTab">
+        <h3 class="section-title">Comfortable Bus Services</h3>
+        <p>Choose from our premium bus services with guaranteed comfort and safety</p>
+        
+        <div class="service-option" onclick="selectService(this, 'bus')">
+          <div class="service-icon">
+            <i class="fas fa-bus"></i>
+          </div>
+          <div class="service-details">
+            <h3>Deluxe AC Bus: Kathmandu to Pokhara</h3>
+            <p><i class="far fa-clock"></i> 7:00 AM | <i class="fas fa-chair"></i> 28 seats available</p>
+            <p><i class="fas fa-road"></i> Approx. 7 hours | <i class="fas fa-luggage-cart"></i> 20kg luggage allowance</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-snowflake"></i> AC</div>
+              <div class="service-feature"><i class="fas fa-tv"></i> Entertainment</div>
+              <div class="service-feature"><i class="fas fa-wifi"></i> WiFi</div>
+              <div class="service-feature"><i class="fas fa-utensils"></i> Snacks</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 2,200
+          </div>
+        </div>
+        
+        <div class="service-option" onclick="selectService(this, 'bus')">
+          <div class="service-icon">
+            <i class="fas fa-bus"></i>
+          </div>
+          <div class="service-details">
+            <h3>Standard Bus: Kathmandu to Chitwan</h3>
+            <p><i class="far fa-clock"></i> 6:30 AM | <i class="fas fa-chair"></i> 15 seats available</p>
+            <p><i class="fas fa-road"></i> Approx. 5 hours | <i class="fas fa-luggage-cart"></i> 15kg luggage allowance</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-fan"></i> Fan</div>
+              <div class="service-feature"><i class="fas fa-water"></i> Water</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 1,200
+          </div>
+        </div>
+      </div>
+      
+      <!-- Combo Packages Tab -->
+      <div class="tab-content" id="comboTab">
+        <div class="combo-benefits">
+          <h4><i class="fas fa-gift"></i> Combo Package Benefits</h4>
+          <ul>
+            <li>Save up to 25% compared to booking separately</li>
+            <li>Guaranteed availability for both bus and accommodation</li>
+            <li>Priority check-in at guest houses</li>
+            <li>Free cancellation up to 48 hours before travel</li>
+          </ul>
+        </div>
+        
+        <div class="service-option combo" onclick="selectService(this, 'combo')">
+          <div class="service-icon">
+            <i class="fas fa-gem"></i>
+          </div>
+          <div class="service-details">
+            <h3>Pokhara Premium Package</h3>
+            <p><i class="fas fa-hotel"></i> Lakeside Retreat (3 nights) + <i class="fas fa-bus"></i> Deluxe AC Bus (Round Trip)</p>
+            <p><i class="fas fa-star"></i> 4.7 (248 reviews) | <i class="fas fa-wifi"></i> Free WiFi | <i class="fas fa-utensils"></i> Breakfast included</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-swimming-pool"></i> Pool</div>
+              <div class="service-feature"><i class="fas fa-snowflake"></i> AC Bus</div>
+              <div class="service-feature"><i class="fas fa-tv"></i> Entertainment</div>
+              <div class="service-feature"><i class="fas fa-wifi"></i> WiFi on Bus</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 8,500<span class="original-price">Rs 10,800</span>
+            <span class="discount">21% OFF</span>
+          </div>
+        </div>
+        
+        <div class="service-option combo" onclick="selectService(this, 'combo')">
+          <div class="service-icon">
+            <i class="fas fa-gem"></i>
+          </div>
+          <div class="service-details">
+            <h3>Chitwan Adventure Package</h3>
+            <p><i class="fas fa-hotel"></i> Jungle Safari Lodge (2 nights) + <i class="fas fa-bus"></i> Standard Bus (Round Trip)</p>
+            <p><i class="fas fa-star"></i> 4.5 (182 reviews) | <i class="fas fa-elephant"></i> Safari Tour Included | <i class="fas fa-utensils"></i> All meals</p>
+            <div class="service-features">
+              <div class="service-feature"><i class="fas fa-elephant"></i> Safari</div>
+              <div class="service-feature"><i class="fas fa-fan"></i> Fan Bus</div>
+              <div class="service-feature"><i class="fas fa-water"></i> Water</div>
+              <div class="service-feature"><i class="fas fa-utensils"></i> All Meals</div>
+            </div>
+          </div>
+          <div class="service-price">
+            Rs 5,200<span class="original-price">Rs 6,500</span>
+            <span class="discount">20% OFF</span>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn btn-accent" onclick="proceedToPayment()" style="margin-top: 2rem;" id="proceedButton" disabled>
+        <i class="fas fa-arrow-right"></i> Continue to Payment
+      </button>
+    </div>
+
+    <!-- Payment Card -->
+    <div class="card hidden" id="paymentCard">
+      <h2><i class="fas fa-credit-card"></i> Secure Payment</h2>
+      <div class="booking-summary">
+        <h3><i class="fas fa-receipt"></i> Your Booking Summary</h3>
+        <p id="busBookingSummary"><i class="fas fa-bus"></i> No bus service selected</p>
+        <p id="guesthouseBookingSummary"><i class="fas fa-hotel"></i> No guest house selected</p>
+        <p class="total-amount">Total Amount: <span id="totalAmount">Rs 0</span></p>
+      </div>
+      
+      <h3 class="section-title">Select Payment Method</h3>
+      <p>Choose your preferred payment option. All transactions are secure and encrypted.</p>
+      
+      <div class="payment-options">
+        <div class="payment-method" onclick="selectPaymentMethod(this, 'credit')">
+          <div class="payment-icon">
+            <i class="far fa-credit-card"></i>
+          </div>
+          <div class="payment-details">
+            <h3>Credit/Debit Card</h3>
+            <p>Pay with Visa, Mastercard, or other cards</p>
+          </div>
+        </div>
+        
+        <div class="payment-method" onclick="selectPaymentMethod(this, 'paypal')">
+          <div class="payment-icon">
+            <i class="fab fa-paypal"></i>
+          </div>
+          <div class="payment-details">
+            <h3>PayPal</h3>
+            <p>Pay with your PayPal account</p>
+          </div>
+        </div>
+        
+        <div class="payment-method" onclick="selectPaymentMethod(this, 'esewa')">
+          <div class="payment-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <div class="payment-details">
+            <h3>eSewa</h3>
+            <p>Pay with your eSewa wallet</p>
+          </div>
+        </div>
+        
+        <div class="payment-method" onclick="selectPaymentMethod(this, 'banktransfer')">
+          <div class="payment-icon">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="payment-details">
+            <h3>Bank Transfer</h3>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn btn-success" onclick="confirmBooking()" style="margin-top: 2rem;" id="confirmButton" disabled>
+        <i class="fas fa-check-circle"></i> Confirm Booking
+      </button>
+    </div>
+
+    <!-- Confirmation Card -->
+    <div class="card hidden" id="confirmationCard">
+      <div class="confirmation-card">
+        <div class="confirmation-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Booking Confirmed!</h2>
+        <p class="confirmation-message">Thank you for booking with Easy Trip. We look forward to making your journey an amazing experience. Details of your booking have been sent to your email.</p>
+        <div class="booking-details">
+          <h3><i class="fas fa-ticket-alt"></i> Booking Details</h3>
+          <p><span class="highlight">Bus Service:</span> <span id="finalBusDetails" class="value">Not selected</span></p>
+          <p><span class="highlight">Guest House:</span> <span id="finalGuestHouseDetails" class="value">Not selected</span></p>
+          <p><span class="highlight">Total Amount:</span> <span id="finalAmount" class="value">Rs 1590</span></p>
+        </div>
+        <button class="btn btn-accent" onclick="startNewBooking()" style="margin-top: 2rem;">
+          <i class="fas fa-arrow-left"></i> Start a New Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Handle Destination Search
+    function searchServices() {
+      const destination = document.getElementById('destinationSelect').value;
+      const travelDate = document.getElementById('travelDate').value;
+
+      if (!destination || !travelDate) {
+        alert('Please select a destination and travel date.');
+        return;
+      }
+
+      document.getElementById('searchCard').classList.add('hidden');
+      document.getElementById('resultsCard').classList.remove('hidden');
+    }
+
+    // Handle Service Selection
+    function selectService(element, type) {
+      const allServices = document.querySelectorAll('.service-option');
+      allServices.forEach(service => service.classList.remove('selected'));
+      element.classList.add('selected');
+      document.getElementById('proceedButton').disabled = false;
+
+      // Update Booking Summary
+      if (type === 'bus') {
+        document.getElementById('busBookingSummary').innerText = element.querySelector('.service-details h3').innerText;
+      } else if (type === 'guesthouse') {
+        document.getElementById('guesthouseBookingSummary').innerText = element.querySelector('.service-details h3').innerText;
+      }
+    }
+
+    // Proceed to Payment
+    function proceedToPayment() {
+      document.getElementById('resultsCard').classList.add('hidden');
+      document.getElementById('paymentCard').classList.remove('hidden');
+    }
+
+    // Select Payment Method
+    function selectPaymentMethod(element, method) {
+      const allMethods = document.querySelectorAll('.payment-method');
+      allMethods.forEach(method => method.classList.remove('selected'));
+      element.classList.add('selected');
+      document.getElementById('confirmButton').disabled = false;
+    }
+
+    // Confirm Booking
+    function confirmBooking() {
+      const busDetails = document.getElementById('busBookingSummary').innerText;
+      const guestHouseDetails = document.getElementById('guesthouseBookingSummary').innerText;
+      const totalAmount = document.getElementById('totalAmount').innerText;
+
+      document.getElementById('finalBusDetails').innerText = busDetails;
+      document.getElementById('finalGuestHouseDetails').innerText = guestHouseDetails;
+      document.getElementById('finalAmount').innerText = totalAmount;
+
+      document.getElementById('paymentCard').classList.add('hidden');
+      document.getElementById('confirmationCard').classList.remove('hidden');
+    }
+
+    // Start a New Booking
+    function startNewBooking() {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById('authCard').classList.remove('hidden');
+      document.getElementById('authError').innerText = '';
+      document.getElementById('authName').value = '';
+      document.getElementById('authEmail').value = '';
+      document.getElementById('authPassword').value = '';
+    }
+
+    // Change Tab
+    function changeTab(tabId) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      document.querySelector(`#${tabId}Tab`).classList.add('active');
+      document.querySelector(`.tab[onclick="changeTab('${tabId}')"]`).classList.add('active');
+    }
+  </script>
+</body>
+</html>

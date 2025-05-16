@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bus Listings | EasyTrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #005eb8, #0072ce);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      padding: 30px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #005eb8, #ffcc00);
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    .header h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .route-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+      animation: fadeIn 1s ease;
+    }
+
+    .route-info span {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .date-info {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      animation: fadeIn 1.2s ease;
+    }
+
+    .bus-icon {
+      width: 180px;
+      height: auto;
+      margin: 20px auto 0;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      animation: bounceIn 1s ease;
+    }
+
+    .bus-list {
+      margin-top: 20px;
+      background-color: #f5f5f5;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      padding: 25px 20px 80px;
+      min-height: calc(100vh - 300px);
+      box-shadow: 0 -10px 20px rgba(0,0,0,0.1);
+      animation: slideUp 0.8s ease;
+    }
+
+    .bus-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border-left: 4px solid #ffcc00;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bus-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .bus-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,204,0,0.05));
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .bus-card:hover::after {
+      opacity: 1;
+    }
+
+    .bus-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bus-name {
+      font-weight: 600;
+      font-size: 18px;
+      color: #005eb8;
+    }
+
+    .bus-price {
+      color: #ff8c00;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .bus-type {
+      font-size: 14px;
+      color: #666;
+      margin: 5px 0;
+    }
+
+    .timing {
+      font-size: 14px;
+      color: #444;
+      font-weight: 500;
+    }
+
+    .duration {
+      font-size: 14px;
+      text-align: right;
+      color: #666;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .seats-left {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background-color: rgba(0,128,0,0.1);
+    }
+
+    .green {
+      color: #008000;
+    }
+
+    .red {
+      color: #ff0000;
+      background-color: rgba(255,0,0,0.1);
+    }
+
+    .icons {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .icons i {
+      margin-left: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .icons i:hover {
+      color: #ffcc00;
+      transform: scale(1.2);
+    }
+
+    .next-button-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .next-button {
+      background-color: #ffcc00;
+      color: #005eb8;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+    /* ... */
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>Select Your Bus</h2>
+    <div class="route-info">
+      <span id="from-text"></span>
+      <i class="fas fa-arrow-right"></i>
+      <span id="to-text"></span>
+    </div>
+    <div class="date-info" id="date-text"></div>
+    <img src="../images/Buss-removebg-preview.png" class="bus-icon" alt="Bus Icon" />
+  </div>
+
+  <div class="bus-list" id="bus-list">
+    <div class="loading" id="loading">
+      <i class="fas fa-circle-notch fa-spin"></i>
+      <p>Finding best buses for you...</p>
+    </div>
+  </div>
+
+  <div class="next-button-container">
+    <button class="next-button" onclick="selectBus()" disabled>
+      <span>Continue to Seats</span>
+      <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+    </button>
+  </div>
+
+  <script>
+    let selectedBusId = null;
+
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+    const to = urlParams.get('to');
+    const date = urlParams.get('date');
+    const passengers = urlParams.get('passengers');
+    const busType = urlParams.get('type');
+
+    // Update header info
+    document.getElementById('from-text').textContent = from;
+    document.getElementById('to-text').textContent = to;
+    document.getElementById('date-text').textContent = new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    // Fetch bus services
+    fetch(`../php/fetch_bus_services.php?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${encodeURIComponent(date)}&passengers=${encodeURIComponent(passengers)}&type=${encodeURIComponent(busType)}`)
+      .then(response => response.json())
+      .then(data => {
+        const busList = document.getElementById('bus-list');
+        document.getElementById('loading').style.display = 'none';
+
+        if (!data.success) {
+          busList.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-exclamation-circle"></i>
+              <p>${data.message || 'No buses found for this route.'}</p>
+              <button onclick="window.history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Search Again
+              </button>
+            </div>`;
+          return;
+        }
+
+        if (data.data.services.length === 0) {
+          busList.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-bus-alt"></i>
+              <p>No buses available for this route on selected date.</p>
+              <button onclick="window.history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Search Again
+              </button>
+            </div>`;
+          return;
+        }
+
+        // Display bus services
+        data.data.services.forEach(bus => {
+          const seatsClass = bus.available_seats < 5 ? 'red' : 'green';
+          const amenityIcons = {
+            'wifi': 'fa-wifi',
+            'charging': 'fa-plug',
+            'ac': 'fa-snowflake',
+            'water': 'fa-glass-water',
+            'blanket': 'fa-blanket',
+            'movie': 'fa-film'
+          };
+
+          const busCard = document.createElement('div');
+          busCard.className = 'bus-card';
+          busCard.innerHTML = `
+            <div class="bus-card-header">
+              <div>
+                <div class="bus-name">${bus.operator_name}</div>
+                <div class="bus-type">${bus.bus_type}</div>
+                <div class="timing">
+                  <i class="far fa-clock"></i> ${bus.departure_time} – ${bus.arrival_time}
+                </div>
+              </div>
+              <div>
+                <div class="bus-price">Rs.${bus.price}</div>
+                <div class="duration">${bus.duration}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="seats-left ${seatsClass}">
+                <i class="fas fa-chair"></i> ${bus.available_seats} Seats left
+              </div>
+              <div class="icons">
+                ${Object.entries(amenityIcons)
+                  .filter(([key]) => bus.amenities.includes(key))
+                  .map(([key, icon]) => `<i class="fas ${icon}" title="${key.charAt(0).toUpperCase() + key.slice(1)}"></i>`)
+                  .join('')}
+              </div>
+            </div>
+          `;
+
+          busCard.addEventListener('click', function() {
+            document.querySelectorAll('.bus-card').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            selectedBusId = bus.service_id;
+            document.querySelector('.next-button').disabled = false;
+          });
+
+          busList.appendChild(busCard);
+        });
+      })
+      .catch(error => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('bus-list').innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Error loading bus services. Please try again.</p>
+            <button onclick="window.location.reload()" class="back-btn">
+              <i class="fas fa-redo"></i> Retry
+            </button>
+          </div>`;
+      });
+
+    // Handle bus selection
+    function selectBus() {
+      if (!selectedBusId) {
+        alert('Please select a bus to continue');
+        return;
+      }
+      window.location.href = `seat.html?service_id=${selectedBusId}&journey_date=${encodeURIComponent(date)}&passengers=${passengers}`;
+    }
+  </script>
+
+</body>
+</html>

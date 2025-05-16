@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Guest House | EasyTrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #005eb8, #ffcc00);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .guesthouse-info {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .booking-form {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .guesthouse-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .guesthouse-title {
+      font-size: 24px;
+      color: #005eb8;
+      margin-bottom: 10px;
+    }
+
+    .guesthouse-location {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .guesthouse-location i {
+      margin-right: 8px;
+      color: #ffb703;
+    }
+
+    .price-display {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffb703;
+      margin-bottom: 20px;
+    }
+
+    .amenities-list {
+      margin-bottom: 20px;
+    }
+
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .amenity-item i {
+      color: #005eb8;
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #005eb8;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .date-inputs {
+      display: flex;
+      gap: 15px;
+    }
+
+    .date-inputs .form-group {
+      flex: 1;
+    }
+
+    .guest-count {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .count-btn {
+      background: #005eb8;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .count-display {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .proceed-btn {
+      background: #ffb703;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    .proceed-btn:hover {
+      background: #e6b800;
+    }
+
+    footer {
+      background: #ffcc00;
+      color: #000;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="back-btn" onclick="window.history.back()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h1>easytrip</h1>
+    <div></div> <!-- Empty div for alignment -->
+  </header>
+
+  <div class="container">
+    <div class="guesthouse-info" id="guesthouseInfo">
+      <!-- Listing details will be populated dynamically -->
+    </div>
+
+    <div class="booking-form">
+      <h2>Booking Details</h2>
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+        <input type="hidden" name="listing_id" id="listing_id">
+        <div class="form-group">
+          <label for="guest-name">Guest Name</label>
+          <input type="text" id="guest-name" name="guest-name" required pattern="[A-Za-z ]{3,}" title="Please enter at least 3 characters, letters only">
+        </div>
+
+        <div class="form-group">
+          <label for="guest-email">Guest Email</label>
+          <input type="email" id="guest-email" name="guest-email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="check_in">Check-in Date</label>
+          <input type="date" id="check_in" name="check_in" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="check_out">Check-out Date</label>
+          <input type="date" id="check_out" name="check_out" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <div class="guest-count">
+            <button type="button" id="decrease" class="count-btn">-</button>
+            <span id="guest-count-display">2</span>
+            <button type="button" id="increase" class="count-btn">+</button>
+            <input type="hidden" id="guest-count" name="guest-count" value="2">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="room_type">Room Type</label>
+          <select id="room_type" name="room_type" required>
+            <option value="standard">Standard Room</option>
+            <option value="deluxe">Deluxe Room</option>
+            <option value="suite">Suite</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="special_requests">Special Requests</label>
+          <textarea id="special_requests" name="special_requests" rows="3" style="width: 100%; padding: 10px;"></textarea>
+        </div>
+        
+        <button type="submit" class="proceed-btn">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p> 2025 EasyTrip. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Initialize the booking page
+    function initBookingPage() {
+      // Get listing ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const listingId = urlParams.get('id');
+      
+      if (!listingId) {
+        window.location.href = 'guest-house.html';
+        return;
+      }
+      
+      // Set the listing ID in the hidden form field
+      document.getElementById('listing_id').value = listingId;
+      
+      // Load the listing details
+      loadListingDetails(listingId);
+    }
+
+    // Fetch and display listing details
+    async function loadListingDetails(listingId) {
+      try {
+        const response = await fetch(`../php/fetch_listing_details.php?id=${listingId}`);
+        const data = await response.json();
+
+        if (data.success) {
+          const listing = data.listing;
+          const imageUrl = listing.image_url || 'https://www.telegraph.co.uk/content/dam/Travel/hotels/asia/nepal/the-pavilions-himalayas-pool-p.jpg';
+          const amenities = listing.amenities ? listing.amenities.split(',').map(a => a.trim()) : [];
+
+          const guesthouseInfo = document.getElementById('guesthouseInfo');
+          guesthouseInfo.innerHTML = `
+            <img src="${imageUrl}" alt="${listing.name}" class="guesthouse-img">
+            <h2 class="guesthouse-title">${listing.name}</h2>
+            <div class="guesthouse-location">
+              <i class="fas fa-map-marker-alt"></i> ${listing.location}
+            </div>
+            <div class="price-display">Rs. ${listing.nightly_rate} / night</div>
+            
+            <h3>Facilities</h3>
+            <div class="amenities-list">
+              ${amenities.map(amenity => `
+                <div class="amenity-item">
+                  <i class="fas fa-check"></i> ${amenity}
+                </div>
+              `).join('')}
+            </div>
+          `;
+
+          // Update room prices based on listing's nightly rate
+          const baseRate = parseInt(listing.nightly_rate);
+          document.getElementById('room_type').innerHTML = `
+            <option value="standard">Standard Room (Rs. ${baseRate})</option>
+            <option value="deluxe">Deluxe Room (Rs. ${Math.round(baseRate * 1.4)})</option>
+            <option value="suite">Suite (Rs. ${Math.round(baseRate * 2)})</option>
+          `;
+        } else {
+          document.getElementById('guesthouseInfo').innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+              <h2 style="color: #ff4444;">Failed to load listing details</h2>
+              <p>${data.message}</p>
+              <button onclick="window.location.href='guest-house.html'" class="back-btn" style="margin-top: 20px;">
+                <i class="fas fa-arrow-left"></i> Back to Listings
+              </button>
+            </div>
+          `;
+          document.querySelector('.booking-form').style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error loading listing details:', error);
+        document.getElementById('guesthouseInfo').innerHTML = `
+          <div style="text-align: center; padding: 20px;">
+            <h2 style="color: #ff4444;">Error</h2>
+            <p>Failed to load listing details. Please try again later.</p>
+            <button onclick="window.location.href='guest-house.html'" class="back-btn" style="margin-top: 20px;">
+              <i class="fas fa-arrow-left"></i> Back to Listings
+            </button>
+          </div>
+        `;
+        document.querySelector('.booking-form').style.display = 'none';
+      }
+    }
+
+    // Guest counter functionality
+    const decreaseBtn = document.getElementById('decrease');
+    const increaseBtn = document.getElementById('increase');
+    const guestCountDisplay = document.getElementById('guest-count-display');
+    const guestCountInput = document.getElementById('guest-count');
+    
+    let count = 2;
+    
+    decreaseBtn.addEventListener('click', () => {
+      if (count > 1) {
+        count--;
+        guestCountDisplay.textContent = count;
+        guestCountInput.value = count;
+      }
+    });
+    
+    increaseBtn.addEventListener('click', () => {
+      if (count < 6) {
+        count++;
+        guestCountDisplay.textContent = count;
+        guestCountInput.value = count;
+      }
+    });
+
+    // Set minimum dates for check-in and check-out
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('check_in').min = today;
+    
+    // Update check-out minimum date when check-in changes
+    document.getElementById('check_in').addEventListener('change', function() {
+      const checkInDate = new Date(this.value);
+      checkInDate.setDate(checkInDate.getDate() + 1);
+      const minCheckOut = checkInDate.toISOString().split('T')[0];
+      document.getElementById('check_out').min = minCheckOut;
+      
+      // Reset check-out if it's before new minimum
+      const checkOut = document.getElementById('check_out');
+      if (checkOut.value && checkOut.value < minCheckOut) {
+        checkOut.value = '';
+      }
+    });
+
+    // Initialize page when DOM is loaded
+    async function handleBookingSubmit(event) {
+      event.preventDefault();
+      
+      try {
+        const formData = new FormData(event.target);
+        const response = await fetch('../php/guesthouse-booking.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Redirect to payment page
+          window.location.href = data.data.redirect_url;
+        } else {
+          alert(data.message || 'Failed to create booking. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting booking:', error);
+        alert('Failed to submit booking. Please try again.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initBookingPage);
+  </script>
+</body>
+</html>

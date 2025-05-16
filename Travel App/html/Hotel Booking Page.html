@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .book-box {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 20px;
+      color: #000;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .book-box input, .book-box select, .book-box button {
+      margin: 5px;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .book-box button {
+      background-color: #ff5722;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hotel-list, .offer-list {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .hotel-card {
+      background-color: #fff;
+      color: #000;
+      border-radius: 15px;
+      padding: 10px;
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    .hotel-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .hotel-card h4 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    .hotel-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .hotel-card .price {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .top-picks-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 25px 0 10px;
+    }
+
+    .top-picks-title i {
+      background-color: #fff;
+      color: #000;
+      border-radius: 50%;
+      padding: 6px;
+    }
+
+    .offer-section {
+      margin-top: 30px;
+    }
+
+    .offer-section .section-title span {
+      font-size: 12px;
+      font-weight: normal;
+      display: block;
+    }
+
+    .view-all {
+      text-align: right;
+      font-size: 13px;
+      color: #ccc;
+      margin-top: -20px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="section-title">Discover Extraordinary<br>Comfort in Hotels</h2>
+
+  <div class="book-box">
+    <div>
+      <input type="date" />
+      <select>
+        <option>1 Room</option>
+        <option>2 Rooms</option>
+      </select>
+      <select>
+        <option>2 Adults</option>
+        <option>3 Adults</option>
+      </select>
+      <button>BOOK NOW</button>
+    </div>
+  </div>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #0072ce;
+        color: #fff;
+      }
+  
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px 15px;
+        text-align: center;
+      }
+  
+      .top-text {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 1.4;
+      }
+  
+      .search-box {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        margin: 0 auto 30px;
+        color: #000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 450px;
+      }
+  
+      .search-box h4 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        color: #333;
+      }
+  
+      .search-fields {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.search-fields input,
+.search-fields select {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+  
+      .search-box button {
+        margin-top: 10px;
+        width: 100%;
+        background-color: #ff5e00;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+  
+      .top-picks-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 20px 0 10px;
+      }
+  
+      .hotel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        justify-items: center;
+        margin-bottom: 30px;
+      }
+  
+      .hotel-card {
+        background-color: #fff;
+        color: #000;
+        padding: 10px;
+        border-radius: 12px;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 250px;
+      }
+  
+      .hotel-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+  
+      .hotel-card h4 {
+        margin: 8px 0 4px;
+        font-size: 16px;
+      }
+  
+      .hotel-card .price {
+        font-size: 14px;
+        color: #555;
+      }
+  
+      .section-title {
+        font-size: 14px;
+        color: #ccc;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+  
+      .section-title span {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+  
+      .view-all {
+        text-align: right;
+        font-size: 13px;
+        color: #eee;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+  
+      @media (max-width: 768px) {
+        .hotel-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-text">
+        Discover Extraordinary<br>Comfort in Hotels
+      </div>
+  
+      <div class="search-box">
+        <h4>Book a Room</h4>
+        <div class="search-fields">
+          <input type="text" placeholder="City">
+          <select>
+            <option>1 Guest</option>
+            <option>2 Guests</option>
+          </select>
+          <select>
+            <option>1 Room</option>
+            <option>2 Rooms</option>
+          </select>
+        </div>
+        <button>BOOK NOW</button>
+      </div>
+  
+      <div class="top-picks-title">
+        <span>A few top picks</span>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+  
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <img src="../images/Resort.jpg" alt="Resort">
+          <h4>Paradise Resort</h4>
+          <p class="price">Rs.4999/night</p>
+        </div>
+        <div class="hotel-card">
+          <img src="../images/Countryside.jpg" alt="Guesthouse">
+          <h4>Countryside Guesthouse</h4>
+          <p class="price">Rs.2999/night</p>
+        </div>
+        <div class="hotel-card">
+          <img src="../images/Himalayan Resort.jpg" alt="Himalayas">
+          <h4>Himalayan Resort</h4>
+          <p class="price">Rs.3999/night</p>
+        </div>
+      </div>
+  
+      <div class="section-title">
+        Special Offers
+        <span>Best offer of the month</span>
+      </div>
+      
+  
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <img src="../images/Homeymoon.jpg" alt="Honeymoon">
+          <h4>Honeymoon</h4>
+          <p class="price">Rs.5999/night</p>
+        </div>
+        <div class="hotel-card">
+          <img src="../images/Meeting.jpg" alt="Meetings">
+          <h4>Meetings</h4>
+          <p class="price">Rs.9999/night</p>
+        </div>
+        <div class="hotel-card">
+          <img src="../images/Romantinc Dinning.jpg" alt="Dining">
+          <h4>Romantic Dining</h4>
+          <p class="price">Rs.4999/night</p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  

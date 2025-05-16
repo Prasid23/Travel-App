@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+    body {
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 400px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #0072ce;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .dashboard {
+      display: none;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      background-color: #0072ce;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      background-color: #e74c3c;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .table th, .table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="loginContainer">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password">
+    </div>
+    <button class="btn" onclick="handleLogin()">Login</button>
+    <div class="error" id="errorMessage">Invalid credentials</div>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+    <h2>Admin Dashboard</h2>
+    <div class="tabs">
+      <div class="tab" onclick="showSection('users')">Manage Users</div>
+      <div class="tab" onclick="showSection('transactions')">Monitor Transactions</div>
+    </div>
+
+    <div class="content-section" id="users">
+      <h3>User Management</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Smita Dhungel</td>
+            <td>Pending</td>
+            <td>
+              <button onclick="alert('Approved')">Approve</button>
+              <button onclick="alert('Suspended')">Suspend</button>
+              <button onclick="alert('Deleted')">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section" id="transactions">
+      <h3>Transaction Reports</h3>
+      <p>Report generated for April 2025</p>
+      <button onclick="alert('Downloading Report...')">Download Report</button>
+    </div>
+
+    <button class="btn logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const error = document.getElementById('errorMessage');
+
+      if (user === 'admin' && pass === 'admin123') {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+      } else {
+        error.style.display = 'block';
+        setTimeout(() => error.style.display = 'none', 2000);
+      }
+    }
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function logout() {
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('loginContainer').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

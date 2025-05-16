@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Your Seat | EasyTrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .seat-header {
+      background: linear-gradient(135deg, #005eb8, #0072ce);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .next-btn {
+      background-color: #ffcc00;
+      color: #005eb8;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .next-btn:hover {
+      background-color: #e6b800;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: #ffcc00;
+      transform: translateX(-3px);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .route {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .exchange-icon {
+      margin: 0 15px;
+      color: #ffcc00;
+      font-size: 20px;
+    }
+
+    .date {
+      font-size: 15px;
+      margin-bottom: 15px;
+      opacity: 0.9;
+      animation: fadeIn 1s ease;
+    }
+
+    .bus-details {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      margin-top: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      animation: slideUp 0.8s ease;
+    }
+
+    .bus-details:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .travel-name {
+      font-weight: 600;
+      color: #005eb8;
+    }
+
+    .bus-type {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #ff8c00;
+    }
+
+    .duration {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      background: white;
+      padding: 15px;
+      font-size: 14px;
+      margin: 0 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 1s ease;
+    }
+
+    .box {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+
+    .booked {
+      background-color: #ccc;
+    }
+
+    .available {
+      background-color: #e1f5e1;
+      border: 2px solid #4CAF50;
+    }
+
+    .selected {
+      background-color: #ffcc00;
+      border: 2px solid #e6b800;
+    }
+
+    .your-seat {
+      background-color: #005eb8;
+      border: 2px solid #004a9e;
+    }
+
+    .seat-layout {
+      background: white;
+      margin: 20px;
+      border-radius: 20px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      animation: slideUp 0.8s ease;
+    }
+
+    .driver {
+      position: absolute;
+      top: -40px;
+      right: 20px;
+      animation: bounceIn 0.8s ease;
+    }
+
+    .driver img {
+      width: 80px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    }
+
+    .columns {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0 20px;
+      font-weight: 600;
+      padding: 0 30px;
+      color: #005eb8;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      padding: 0 30px;
+    }
+
+    .seat {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seat::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .seat:hover::after {
+      opacity: 1;
+    }
+
+    .available:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .selected {
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 204, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .legend {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+      
+      .bus-details {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .price-box {
+        text-align: center;
+      }
+      
+      .row {
+        padding: 0 15px;
+      }
+      
+      .seat {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="seat-header">
+    <div class="top-row">
+      <a href="bus.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+      </a>
+      <button class="next-btn">
+        <span>Proceed to Payment</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="route">
+      <span>KTM</span>
+      <i class="fas fa-arrows-alt-h exchange-icon"></i>
+      <span>Pokhara</span>
+    </div>
+    <div class="date">
+      <i class="far fa-calendar-alt"></i> 12th Jan 2023 | Monday
+    </div>
+
+    <div class="bus-details">
+      <div class="time"><strong>6:00 PM</strong> – 3:00 AM</div>
+      <div>
+        <div class="travel-name">Sangitam Travels</div>
+        <div class="bus-type">A/C Sleeper (2+2)</div>
+      </div>
+      <div class="price-box">
+        <div class="price">From <strong>Rs.600</strong></div>
+        <div class="duration">9 Hours Journey</div>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class="legend">
+    <div><span class="box booked"></span> Booked</div>
+    <div><span class="box available"></span> Available</div>
+    <div><span class="box selected"></span> Selected</div>
+    <div><span class="box your-seat"></span> Your Seat</div>
+  </div>
+
+  <div class="seat-layout">
+    <div class="driver"><img src="../images/driver-removebg-preview.png" alt="Driver Icon"></div>
+    <div class="columns">
+      <span>A</span>
+      <span>B</span>
+      <span>C</span>
+      <span>D</span>
+    </div>
+
+    <div class="row">
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+    </div>
+    <div class="row">
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat selected"><i class="fas fa-check"></i></div>
+      <div class="seat selected"><i class="fas fa-check"></i></div>
+    </div>
+    <div class="row">
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+    </div>
+    <div class="row">
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+    </div>
+    <div class="row">
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat available"><i class="fas fa-chair"></i></div>
+      <div class="seat booked"><i class="fas fa-user-slash"></i></div>
+    </div>
+  </div>
+
+  <script>
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceId = urlParams.get('service_id');
+    // If journey_date is not provided in URL, use today's date as fallback
+    const journeyDate = urlParams.get('journey_date') || new Date().toISOString().split('T')[0];
+    // Allow users to select their own number of seats (minimum 1, maximum 6)
+    const maxSeats = 6; // Maximum seats a user can book
+    // The passengers parameter is now treated as a suggestion, not a strict requirement
+    const suggestedPassengers = parseInt(urlParams.get('passengers') || '1');
+    let selectedSeats = [];
+    let pricePerSeat = 0;
+    
+    // Log parameters for debugging
+    console.log('Service ID:', serviceId);
+    console.log('Journey Date:', journeyDate);
+    console.log('Suggested Passengers:', suggestedPassengers);
+
+    // Fetch bus details and booked seats
+    async function fetchBusDetails() {
+      try {
+        // Make sure we have both service_id and journey_date
+        if (!serviceId) {
+          throw new Error('Missing service ID. Please go back and select a bus.');
+        }
+        
+        console.log(`Fetching details for service ${serviceId} on ${journeyDate}`);
+        const response = await fetch(`../php/fetch_bus_details.php?service_id=${serviceId}&journey_date=${journeyDate}`);
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.message);
+        }
+
+        console.log('Bus details fetched successfully:', data.data);
+        
+        // Update UI with bus details
+        document.querySelector('.route').innerHTML = `
+          <span>${data.data.route.split(' to ')[0]}</span>
+          <i class="fas fa-exchange-alt exchange-icon"></i>
+          <span>${data.data.route.split(' to ')[1]}</span>
+        `;
+
+        document.querySelector('.date').textContent = journeyDate;
+
+        document.querySelector('.bus-details').innerHTML = `
+          <div>
+            <div class="travel-name">${data.data.bus_name}</div>
+            <div class="bus-type">${data.data.bus_type}</div>
+            <div class="duration">${data.data.duration}</div>
+          </div>
+          <div class="price-box">
+            <div class="price">Rs. ${data.data.price}</div>
+            <div>${data.data.departure_time} - ${data.data.arrival_time}</div>
+          </div>
+        `;
+
+        // Store price per seat for calculation
+        pricePerSeat = data.data.price;
+
+        // Generate seat layout
+        generateSeatLayout(data.data.total_seats, data.data.booked_seats);
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to load bus details: ' + error.message);
+      }
+    }
+
+    function generateSeatLayout(totalSeats, bookedSeats) {
+      const seatLayout = document.querySelector('.seat-layout');
+      const rows = Math.ceil(totalSeats / 4);
+      let seatNumber = 1;
+
+      // Clear existing layout except driver and columns
+      const existingRows = seatLayout.querySelectorAll('.row');
+      existingRows.forEach(row => row.remove());
+
+      // Generate new layout
+      for (let i = 0; i < rows; i++) {
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.style.animation = `fadeIn 0.5s ease ${i * 0.1}s both`;
+
+        for (let j = 0; j < 4 && seatNumber <= totalSeats; j++) {
+          const seat = document.createElement('div');
+          const isBooked = bookedSeats.includes(seatNumber.toString());
+          seat.className = `seat ${isBooked ? 'booked' : 'available'}`;
+          seat.dataset.seatNumber = seatNumber;
+          seat.innerHTML = isBooked ? 
+            '<i class="fas fa-user-slash"></i>' : 
+            '<i class="fas fa-chair"></i>';
+
+          if (!isBooked) {
+            seat.addEventListener('click', handleSeatClick);
+          }
+
+          row.appendChild(seat);
+          seatNumber++;
+        }
+
+        seatLayout.appendChild(row);
+      }
+    }
+
+    function handleSeatClick() {
+      const seatNumber = this.dataset.seatNumber;
+
+      if (this.classList.contains('selected')) {
+        // Deselect seat
+        this.classList.remove('selected');
+        this.classList.add('available');
+        this.innerHTML = '<i class="fas fa-chair"></i>';
+        selectedSeats = selectedSeats.filter(num => num !== seatNumber);
+      } else if (selectedSeats.length < maxSeats) {
+        // Select seat (up to maximum allowed)
+        this.classList.remove('available');
+        this.classList.add('selected');
+        this.innerHTML = '<i class="fas fa-check"></i>';
+        selectedSeats.push(seatNumber);
+      } else {
+        alert(`You can select a maximum of ${maxSeats} seats.`);
+        return;
+      }
+
+      // Update the button text with current selection count
+      updateNextButton();
+    }
+
+    function updateNextButton() {
+      // Always show the next button, but update the text
+      const nextBtn = document.querySelector('.next-btn');
+      updateTotalAmount();
+      
+      // We don't need to set onclick here as we've already set it in the initialization
+    }
+
+    async function proceedToPayment(e) {
+      e.preventDefault();
+      
+      // If no seats are selected, show a message
+      if (selectedSeats.length === 0) {
+        alert('Please select at least one seat to proceed.');
+        return;
+      }
+      
+      // Maximum seats check
+      if (selectedSeats.length > maxSeats) {
+        alert(`You can select a maximum of ${maxSeats} seats.`);
+        return;
+      }
+      
+      try {
+        console.log('Booking seats with parameters:', {
+          service_id: serviceId,
+          journey_date: journeyDate,
+          seats: selectedSeats.join(','),
+          total_amount: pricePerSeat * selectedSeats.length
+        });
+        
+        const response = await fetch('../php/book_bus_seats.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            service_id: serviceId,
+            journey_date: journeyDate,
+            seats: selectedSeats.join(','),
+            total_amount: pricePerSeat * selectedSeats.length
+          })
+        });
+
+        const data = await response.json();
+        console.log('Booking response:', data);
+
+        if (data.success) {
+          // Redirect to payment.html with booking details
+          window.location.href = `payment.html?booking_id=${data.data.booking_id}&amount=${pricePerSeat * selectedSeats.length}`;
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'Failed to book seats. Please try again.');
+      }
+    }
+
+    // Initialize
+    fetchBusDetails();
+    
+    // Set up the Next button
+    document.querySelector('.next-btn').addEventListener('click', proceedToPayment);
+
+    // Handle browser back button
+    window.addEventListener('popstate', function(event) {
+      if (document.referrer.includes('bus.html')) {
+        window.location.href = 'bus.html';
+      }
+    });
+
+    // Update total amount display when seats are selected
+    function updateTotalAmount() {
+      const totalAmount = pricePerSeat * selectedSeats.length;
+      const nextBtn = document.querySelector('.next-btn');
+      
+      // Update the button text to show selected seats and total amount
+      if (selectedSeats.length === 0) {
+        nextBtn.querySelector('span').textContent = 'Select Seats to Proceed';
+      } else if (selectedSeats.length === 1) {
+        nextBtn.querySelector('span').textContent = 
+          `Proceed with 1 Seat (Rs.${totalAmount})`;
+      } else {
+        nextBtn.querySelector('span').textContent = 
+          `Proceed with ${selectedSeats.length} Seats (Rs.${totalAmount})`;
+      }
+    }
+  </script>
+
+</body>
+</html>

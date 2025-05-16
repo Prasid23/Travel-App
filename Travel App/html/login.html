@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasyTrip - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #0080ff;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to right, #005eb8, #ffcc00);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #fff;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .login-container h2 {
+      color: #005eb8;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column; /* Ensure label is above input */
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 16px;
+    }
+
+    .login-btn:hover {
+      background-color: #e6b800;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>easytrip</h1>
+  </header>
+
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <form action="../php/login.php" method="POST" id="loginForm">
+      <input type="hidden" name="login" value="1">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username">
+      <div id="username-error" class="error"></div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password">
+      <div id="password-error" class="error"></div>
+    </div>
+    <button type="submit" class="login-btn">LOGIN</button>
+  </div>
+  </form>
+
+  <script>
+    function validateLogin() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const usernameError = document.getElementById("username-error");
+      const passwordError = document.getElementById("password-error");
+      
+      let isValid = true;
+
+      // Clear previous error messages
+      usernameError.textContent = "";
+      passwordError.textContent = "";
+
+      if (username === "") {
+        usernameError.textContent = "Username is required.";
+        isValid = false;
+      }
+
+      if (password === "") {
+        passwordError.textContent = "Password is required.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Redirect to main-home-page.html if both fields are filled
+        window.location.href = "main-home-page.html";
+      }
+    }
+  </script>
+</body>
+</html>

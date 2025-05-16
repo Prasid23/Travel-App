@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Guesthouse & Bus Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s;
+        }
+        h1 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+        .gh-header { background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .bus-header { background-image: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .combo-header { background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        .service-desc {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="animate__animated animate__fadeInDown">
+            <h1>Premium Guesthouse & Bus Services</h1>
+            <p class="subtitle">Experience comfort and convenience with our exclusive travel packages</p>
+        </header>
+
+        <div class="services-grid">
+            <!-- Guesthouse Card -->
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="card-header gh-header">
+                    <span class="tag">Popular</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="service-title">Guesthouse Stay</h3>
+                    <p class="service-desc">Luxurious accommodation with premium amenities, perfect for your relaxing getaway.</p>
+                    <div class="price">₹1500/night</div>
+                    <a href="/guesthouse-bus-payment.html?service=guesthouse" class="btn">Book Now</a>
+                </div>
+            </div>
+
+            <!-- Bus Card -->
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="card-header bus-header">
+                    <span class="tag">Economy</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="service-title">Bus Service</h3>
+                    <p class="service-desc">Comfortable and affordable transportation for all your travel needs.</p>
+                    <div class="price">₹500/trip</div>
+                    <a href="/guesthouse-bus-payment.html?service=bus" class="btn">Book Now</a>
+                </div>
+            </div>
+
+            <!-- Combo Card -->
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="card-header combo-header">
+                    <span class="tag">Best Value</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="service-title">Combo Package</h3>
+                    <p class="service-desc">Save 10% when you book both guesthouse and bus services together.</p>
+                    <div class="price">₹1800</div>
+                    <a href="/guesthouse-bus-payment.html?service=combo" class="btn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

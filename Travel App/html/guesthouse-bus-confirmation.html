@@ -1,0 +1,231 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .confirmation-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 3rem;
+            animation: fadeInUp 0.8s;
+        }
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+            animation: bounceIn 1s;
+        }
+        .checkmark i {
+            color: white;
+            font-size: 3.5rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .booking-details {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+        }
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: var(--dark);
+        }
+        .detail-value {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+        .download-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .download-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .pdf-btn {
+            background: #e74c3c;
+            color: white;
+        }
+        .email-btn {
+            background: #3498db;
+            color: white;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+        }
+        @media (max-width: 600px) {
+            .confirmation-card {
+                padding: 2rem 1rem;
+            }
+            .download-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-card animate__animated animate__fadeInUp">
+        <div class="checkmark animate__animated animate__bounceIn">
+            <i class="fas fa-check"></i>
+        </div>
+        <h1>Booking Confirmed!</h1>
+        <p class="subtitle">Thank you for choosing our services. Your booking details have been sent to your email.</p>
+        
+        <div class="booking-details">
+            <div class="detail-item">
+                <span class="detail-label">Service:</span>
+                <span id="confirm-service" class="detail-value">Guesthouse Stay</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Amount Paid:</span>
+                <span id="confirm-price" class="detail-value">₹1500</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Name:</span>
+                <span id="confirm-name" class="detail-value">Smita Dhungel</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Email:</span>
+                <span id="confirm-email" class="detail-value">smita@gmail.com</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Phone:</span>
+                <span id="confirm-phone" class="detail-value">9876543210</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Booking Date:</span>
+                <span id="confirm-date" class="detail-value">25 Dec 2023</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Booking ID:</span>
+                <span class="detail-value">GHB-2023-789456</span>
+            </div>
+        </div>
+
+        <div class="download-btns">
+            <a href="#" class="download-btn pdf-btn">
+                <i class="fas fa-file-pdf"></i> Download Invoice
+            </a>
+            <a href="#" class="download-btn email-btn">
+                <i class="fas fa-envelope"></i> Resend Email
+            </a>
+        </div>
+
+        <a href="/guesthouse-bus.html" class="btn">Back to Home</a>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Set booking details
+        document.getElementById('confirm-service').textContent = 
+            decodeURIComponent(urlParams.get('service') || 'Guesthouse Stay');
+        document.getElementById('confirm-name').textContent = 
+            decodeURIComponent(urlParams.get('name') || '');
+        document.getElementById('confirm-email').textContent = 
+            decodeURIComponent(urlParams.get('email') || '');
+        document.getElementById('confirm-phone').textContent = 
+            decodeURIComponent(urlParams.get('phone') || '');
+        
+        // Format date
+        const dateStr = decodeURIComponent(urlParams.get('date') || '');
+        if (dateStr) {
+            const date = new Date(dateStr);
+            document.getElementById('confirm-date').textContent = 
+                date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+        
+        // Set price based on service
+        const service = urlParams.get('service');
+        if (service === 'guesthouse') {
+            document.getElementById('confirm-price').textContent = '₹1500';
+        } else if (service === 'bus') {
+            document.getElementById('confirm-price').textContent = '₹500';
+        } else if (service === 'combo') {
+            document.getElementById('confirm-price').textContent = '₹1800';
+        }
+    </script>
+</body>
+</html>

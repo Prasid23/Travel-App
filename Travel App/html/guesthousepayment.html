@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment | EasyTrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #005eb8, #ffcc00);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .booking-summary {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .payment-form {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 20px;
+      color: #005eb8;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .guesthouse-img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .booking-details {
+      margin-bottom: 20px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      color: #666;
+    }
+
+    .detail-value {
+      font-weight: 600;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .total-label {
+      color: #005eb8;
+    }
+
+    .total-value {
+      color: #ffb703;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #005eb8;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .card-icons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 25px;
+      object-fit: contain;
+    }
+
+    .expiry-cvv {
+      display: flex;
+      gap: 15px;
+    }
+
+    .expiry-cvv .form-group {
+      flex: 1;
+    }
+
+    .pay-btn {
+      background: #ffb703;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    .pay-btn:hover {
+      background: #e6b800;
+    }
+
+    footer {
+      background: #ffcc00;
+      color: #000;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .success-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 100;
+    }
+
+    .success-message i {
+      font-size: 50px;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .success-message h2 {
+      color: #005eb8;
+      margin-bottom: 10px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="back-btn" onclick="window.history.back()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h1>easytrip</h1>
+    <div></div> <!-- Empty div for alignment -->
+  </header>
+
+  <div class="container">
+    <div class="booking-summary">
+      <h2 class="section-title">Booking Summary</h2>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP8fLLwtDFCgtVCxGFTVN0MI1KmifWLGpslQ&s" alt="Mountain View Guest House" class="guesthouse-img">
+      
+      <div class="booking-details" id="booking-details">
+        <h3 id="property-name">Loading...</h3>
+        <p><i class="fas fa-map-marker-alt"></i> <span id="property-location">Loading...</span></p>
+        
+        <div class="detail-row">
+          <span class="detail-label">Check-in:</span>
+          <span class="detail-value" id="check-in">Loading...</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Check-out:</span>
+          <span class="detail-value" id="check-out">Loading...</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Guests:</span>
+          <span class="detail-value" id="guests">Loading...</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Nights:</span>
+          <span class="detail-value" id="nights">Loading...</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Room Rate:</span>
+          <span class="detail-value" id="room-rate">Loading...</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Taxes & Fees:</span>
+          <span class="detail-value" id="taxes">Loading...</span>
+        </div>
+      </div>
+      
+      <div class="total-row">
+        <span class="total-label">Total Amount:</span>
+        <span class="total-value" id="total-amount">Loading...</span>
+      </div>
+    </div>
+
+    <div class="payment-form">
+      <h2 class="section-title">Payment Details</h2>
+     <form id="payment-form" onsubmit="handlePayment(event)">
+      <input type="hidden" id="booking-id" name="booking_id">
+      <div class="form-group">
+        <label for="card-name">Name on Card</label>
+        <input type="text" id="card-name" name="card_name" placeholder="Name on card" required pattern="[A-Za-z ]{6,}" title="Please enter at least 6 characters">
+      </div>
+      
+      <div class="form-group">
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required pattern="[0-9 ]{16,19}" title="Please enter a valid card number" maxlength="19">
+        <div class="card-icons">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Visa" class="card-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196561.png" alt="Mastercard" class="card-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="American Express" class="card-icon">
+        </div>
+      </div>
+      
+      <div class="expiry-cvv">
+        <div class="form-group">
+          <label for="expiry">Expiry Date</label>
+          <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" title="Please enter a valid expiry date (MM/YY)" maxlength="5">
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" placeholder="123" required pattern="[0-9]{3,4}" title="Please enter a valid CVV" maxlength="4">
+        </div>
+      </div>
+      
+      <button type="submit" class="pay-btn" id="pay-now">Pay Now</button>
+    </form>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  
+  <div class="success-message" id="success-message">
+    <i class="fas fa-check-circle"></i>
+    <h2>Payment Successful!</h2>
+    <p id="success-message-text">Your booking at <span id="property-name-success"></span> is confirmed.</p>
+    <p>We've sent the details to your email.</p>
+    <button class="pay-btn" style="margin-top: 20px;" onclick="window.location.href='main-home-page.html'">Back to Home</button>
+  </div>
+
+  <footer>
+    <p> 2025 EasyTrip. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Format currency
+    function formatCurrency(amount) {
+      return 'Rs. ' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+
+    // Load booking details
+    async function loadBookingDetails() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('booking_id');
+        
+        if (!bookingId) {
+          throw new Error('Booking ID is required');
+        }
+        
+        document.getElementById('booking-id').value = bookingId;
+        
+        const response = await fetch(`../php/get_booking_details.php?booking_id=${bookingId}`);
+        const data = await response.json();
+        
+        if (!data.success) {
+          throw new Error(data.message);
+        }
+        
+        const booking = data.data;
+        
+        // Update booking details
+        document.getElementById('property-name').textContent = booking.property_name;
+        document.getElementById('property-location').textContent = booking.property_location;
+        document.getElementById('check-in').textContent = booking.check_in;
+        document.getElementById('check-out').textContent = booking.check_out;
+        document.getElementById('guests').textContent = booking.guests + ' Guest(s)';
+        document.getElementById('nights').textContent = booking.nights + ' Night(s)';
+        document.getElementById('room-rate').textContent = formatCurrency(booking.room_rate) + ' / night';
+        document.getElementById('taxes').textContent = formatCurrency(booking.taxes);
+        document.getElementById('total-amount').textContent = formatCurrency(booking.total_amount);
+        
+        // Update image if available
+        if (booking.image_url) {
+          document.querySelector('.guesthouse-img').src = booking.image_url;
+        }
+        
+      } catch (error) {
+        console.error('Error loading booking details:', error);
+        alert('Failed to load booking details. ' + error.message);
+      }
+    }
+
+    // Handle payment form submission
+    async function handlePayment(event) {
+      event.preventDefault();
+      
+      try {
+        const formData = new FormData(event.target);
+        
+        // Show loading state
+        const payBtn = document.getElementById('pay-now');
+        payBtn.disabled = true;
+        payBtn.textContent = 'Processing...';
+        
+        const response = await fetch('../php/process_payment.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Show success message
+          document.getElementById('overlay').style.display = 'block';
+          document.getElementById('success-message').style.display = 'block';
+          
+          // Update success message with property name
+          const propertyName = document.getElementById('property-name').textContent;
+          document.getElementById('property-name-success').textContent = propertyName;
+          document.getElementById('success-message-text').textContent = `Your booking at ${propertyName} is confirmed.`;
+          
+          // Redirect to home after 3 seconds
+          setTimeout(() => {
+            window.location.href = 'main-home-page.html';
+          }, 3000);
+        } else {
+          throw new Error(data.message);
+        }
+        
+      } catch (error) {
+        console.error('Error processing payment:', error);
+        alert('Failed to process payment. ' + error.message);
+        
+        // Reset button state
+        const payBtn = document.getElementById('pay-now');
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay Now';
+      }
+    }
+
+    // Format card number input
+    document.getElementById('card-number').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+      e.target.value = formattedValue.substring(0, 19);
+    });
+
+    // Format expiry date input
+    document.getElementById('expiry').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2);
+      }
+      e.target.value = value.substring(0, 5);
+    });
+
+    // Check login status
+    async function checkLoginStatus() {
+      try {
+        const response = await fetch('../php/check_session.php');
+        const data = await response.json();
+        
+        if (!data.success) {
+          // Not logged in, redirect to login page
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        // User is logged in, load booking details
+        loadBookingDetails();
+        
+      } catch (error) {
+        console.error('Error checking login status:', error);
+        window.location.href = 'login.html';
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</body>
+</html>

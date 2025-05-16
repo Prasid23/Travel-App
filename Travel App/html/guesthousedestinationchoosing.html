@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guesthouse Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* --- Styling Same As Before --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f2f5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .booking-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .booking-container h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fdfdfd;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #007bff;
+    }
+
+    .search-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background-color: #005ec4;
+    }
+
+    @media (max-width: 500px) {
+      .booking-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-container">
+    <h2><i class="fas fa-bed"></i> Book Your Guesthouse</h2>
+
+    <div class="form-group">
+      <label for="from">Destination</label>
+      <select id="from" name="from">
+        <option value="">Select Location</option>
+        <option value="Kathmandu">Kathmandu</option>
+        <option value="Pokhara">Pokhara</option>
+        <option value="Biratnagar">Biratnagar</option>
+      </select>
+    </div>
+    <button class="search-btn" onclick="redirectToGuesthouseResults()">
+      <i class="fas fa-search"></i> Search Guesthouses
+    </button>
+  </div>
+
+  <script>
+    function redirectToGuesthouseResults() {
+      const from = document.getElementById('from').value;
+
+      if (!from) {
+        alert('Please fill in both fields.');
+        return;
+      }
+
+      // Redirect with query parameters
+      const query = `?from=${encodeURIComponent(from)}`;
+      window.location.href = `guest-house.html${query}`;
+    }
+  </script>
+</body>
+</html>

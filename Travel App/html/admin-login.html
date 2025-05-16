@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login | EasyTrip</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flicker Fix -->
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    body.ready {
+      opacity: 1;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("ready");
+      
+      // Check if admin is already logged in
+      const adminToken = localStorage.getItem('adminToken');
+      if (adminToken) {
+        window.location.href = 'admin-dashboard.html';
+      }
+    });
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --primary-dark: #1a252f;
+      --primary-light: #34495e;
+      --secondary-color: #e74c3c;
+      --accent-color: #3498db;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --danger-color: #e74c3c;
+      --text-color: #333;
+      --text-light: #7f8c8d;
+      --border-color: #ecf0f1;
+      --bg-color: #f8f9fa;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    }
+    .login-container {
+      width: 380px;
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 1;
+    }
+    .login-container:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+      position: relative;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      font-weight: 500;
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s;
+      background-color: #f9f9f9;
+    }
+    input:focus {
+      border-color: var(--accent-color);
+      background-color: white;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .login-btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    .error-message {
+      color: #e74c3c;
+      margin: 15px 0;
+      font-size: 14px;
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+    .forgot-link {
+      display: block;
+      margin-top: 15px;
+      color: var(--accent-color);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 38px;
+      color: var(--accent-color);
+    }
+    @media (max-width: 480px) {
+      .login-container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container" id="loginBox">
+    <h2>System Administrator</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter admin username" required>
+        <i class="fas fa-user input-icon"></i>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <i class="fas fa-lock input-icon"></i>
+      </div>
+      <div id="errorMessage" class="error-message">
+        <i class="fas fa-exclamation-circle"></i> Invalid username or password
+      </div>
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <a href="#" class="forgot-link">Forgot password?</a>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginForm = document.getElementById('loginForm');
+      const loginBox = document.getElementById('loginBox');
+      const errorElement = document.getElementById('errorMessage');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      // Handle form submission
+      loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        if (!username || !password) {
+          showError('Please enter both username and password');
+          return;
+        }
+        
+        // Show loading state
+        const loginBtn = this.querySelector('.login-btn');
+        const originalBtnText = loginBtn.innerHTML;
+        loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        loginBtn.disabled = true;
+        
+        try {
+          // Create form data
+          const formData = new FormData();
+          formData.append('username', username);
+          formData.append('password', password);
+          formData.append('action', 'adminLogin');
+          
+          // Send login request
+          const response = await fetch('../php/api_admin.php', {
+            method: 'POST',
+            body: formData
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Store admin data and token
+            localStorage.setItem('adminToken', data.token);
+            localStorage.setItem('adminData', JSON.stringify(data.admin));
+            
+            // Show success message
+            loginBox.innerHTML = `
+              <div style="text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: var(--success-color); margin-bottom: 20px;"></i>
+                <h2>Login Successful!</h2>
+                <p style="color: var(--text-color); margin-bottom: 30px;">Redirecting to dashboard...</p>
+              </div>
+            `;
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+              window.location.href = 'admin-dashboard.html';
+            }, 1500);
+          } else {
+            showError(data.message || 'Invalid username or password');
+            loginBtn.innerHTML = originalBtnText;
+            loginBtn.disabled = false;
+          }
+        } catch (error) {
+          showError('Connection error. Please try again.');
+          loginBtn.innerHTML = originalBtnText;
+          loginBtn.disabled = false;
+        }
+      });
+      
+      // Function to show error message
+      function showError(message) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        loginBox.style.animation = 'shake 0.5s';
+        
+        // Reset animation
+        setTimeout(() => {
+          loginBox.style.animation = '';
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>
